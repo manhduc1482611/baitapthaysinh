@@ -1,15 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Bài tập Buổi 9</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra mật khẩu</title>
 </head>
 <body>
+    <h2>Bài tập Kiểm tra Mật khẩu</h2>
+    <p>Vui lòng xem hộp thoại trên trình duyệt để tiếp tục.</p>
 
-    <h2>Kết quả bài tập</h2>
+    <script>
+        function kiemTraTieuChi(matKhau) {
+            let loi = [];
+            
+            if (matKhau.length < 8) {
+                loi.push("Cần có ít nhất 8 ký tự");
+            }
+            if (!/[A-Z]/.test(matKhau)) {
+                loi.push("Cần chứa ít nhất một chữ cái viết hoa (A-Z)");
+            }
+            if (!/[a-z]/.test(matKhau)) {
+                loi.push("Cần chứa ít nhất một chữ cái viết thường (a-z)");
+            }
+            if (!/[0-9]/.test(matKhau)) {
+                loi.push("Cần chứa ít nhất một chữ số (0-9)");
+            }
+            if (!/[^A-Za-z0-9]/.test(matKhau)) {
+                loi.push("Cần chứa ít nhất một ký tự đặc biệt (ví dụ: @, #, $, % ...)");
+            }
 
-    <pre id="output"></pre>
+            return loi;
+        }
 
-    <script src="main.js"></script>
+        function danhGiaDoManh(matKhau) {
+            let doDai = matKhau.length;
+            if (doDai === 8) {
+                return "Yếu";
+            } else if (doDai > 8 && doDai < 12) {
+                return "Trung bình";
+            } else {
+                return "Mạnh";
+            }
+        }
+
+        function chayChuongTrinh() {
+            while (true) {
+                let matKhau = prompt("Vui lòng nhập mật khẩu của bạn:\n(Ít nhất 8 ký tự, có chữ hoa, chữ thường, số và ký tự đặc biệt)");
+
+                if (matKhau === null) {
+                    alert("Bạn đã hủy thao tác nhập mật khẩu.");
+                    break; 
+                }
+
+                let danhSachLoi = kiemTraTieuChi(matKhau);
+
+                if (danhSachLoi.length > 0) {
+                    let thongBaoLoi = "Mật khẩu không hợp lệ!\n\nLỗi của bạn:\n- " + danhSachLoi.join("\n- ") + "\n\nVui lòng nhấn OK để nhập lại.";
+                    alert(thongBaoLoi);
+                } else {
+                    let doManh = danhGiaDoManh(matKhau);
+                    alert("Mật khẩu hợp lệ!\n\nĐộ mạnh của mật khẩu: " + doManh);
+                    break;
+                }
+            }
+        }
+
+        chayChuongTrinh();
+    </script>
 </body>
 </html>
