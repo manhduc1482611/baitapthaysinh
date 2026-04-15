@@ -4,7 +4,7 @@ class Student {
         this.msv = String(msv).trim();
         this.fullName = fullName.trim();
         this.khoaHoc = `Khóa ${this.msv.substring(0, 2)}`;
-        this.tenKhoa = this.msv.charAt(2) === 'A' ? "HTTTQL" : "Khoa Cơ Bản";
+        this.tenKhoa = this.msv.startsWith('27A40429') ? "CNTT" : "HTTTQL";
         this.email = this.generateEmail();
     }
     generateEmail() {
